@@ -19,6 +19,7 @@ public class ItemData : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+		Debug.Log(eventData);
 		tooltip.Activate (item);
 	}
 	public void OnPointerExit(PointerEventData eventData)

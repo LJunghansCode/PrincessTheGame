@@ -16,52 +16,25 @@ public class EnemyAttack : MonoBehaviour
 	{
 		// Setting up the references.
 		player = GameObject.FindGameObjectWithTag ("Player");
+        anim = GetComponent <Animator> ();
 		playerHealth = player.GetComponent <PlayerHealth> ();
+        timer = 0f;
 
 	}
-	void OnCollisionEnter2D (Collision2D collide) {
-		{
-			if (collide.gameObject == player) {
-				anim.SetBool ("is_walking", false);
-				playerInRange = true;
 
-			}
-		}
-	}
-	void OnCollisionExit2D (Collision2D other) {
-		{
-			if (other.gameObject == player) {
-				anim.SetBool ("is_walking", true);
-				playerInRange = false;
-			}
-		}
-	}
-	void Update ()
+
+	public void Attack ()
 	{
-		
-		if (playerInRange == true) 
-		{
-			timer += Time.deltaTime;
-			if (timer > timeBetweenAttacks) 
-			{
-				Attack ();
-			}
-			if (timer < timer) 
-			{
-				anim.SetBool ("is_attacking", false);
-			}
-		}
+        if (playerHealth.currentHealth > 0)
+        {
+            anim.SetBool("is_attacking", false);
+            timer += Time.deltaTime;
+                if (timer > timeBetweenAttacks) {
+			        anim.SetBool ("is_attacking", true);
+			        playerHealth.TakeDamage (attackDamage);
+                    timer = 0f;
+            }
 
-	}
-
-
-	void Attack ()
-	{
-		if(playerHealth.currentHealth > 0)
-		{
-			timer = 0f;
-			anim.SetBool ("is_attacking", true);
-			playerHealth.TakeDamage (attackDamage);
-		}
-	}
+        }
+    }
 }

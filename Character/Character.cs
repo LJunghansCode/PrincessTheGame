@@ -5,6 +5,6 @@ using System.Collections;
 public class Character {
 	public string name;
 	public Character () {
-		this.name = "";
+		this.name = " ";
 	}
 }

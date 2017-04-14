@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour {
 	
-	GameObject slotPanel;
+	public GameObject slotPanel;
 	ItemDatabase database;
-	GameObject inventoryContainer;
+	public GameObject inventoryContainer;
 
 	public GameObject inventorySlot;
 	public GameObject inventoryItem;
@@ -21,8 +21,6 @@ public class ItemManager : MonoBehaviour {
 	void Start(){
 
 
-		inventoryContainer = GameObject.Find("Inventory Panel");
-		slotPanel = inventoryContainer.transform.FindChild ("Slot Panel").gameObject;
 		open = GetComponent<Button>();
 		close = GetComponent<Button>();
 		database = GetComponent<ItemDatabase> ();
@@ -44,13 +42,13 @@ public class ItemManager : MonoBehaviour {
 		Additem (1);
 		Additem (2);
 		Additem (2);
-		Additem (2);
+
 	}
 	public void Additem(int id){
 		Item itemToAdd = database.FetchByID (id);
 
 		if (itemToAdd.Stackable && CheckItemValid (itemToAdd)) {
-			for (int i = 0; i < inventory.Count; i++) {
+			for (int i = 1; i < inventory.Count; i++) {
 				if (inventory [i].ID == id) {
 					ItemData data = slots [i].transform.GetChild (0).GetComponent<ItemData> ();
 					data.amount++;
